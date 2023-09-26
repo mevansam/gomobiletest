@@ -1,9 +1,0 @@
-framework module "User" {
-	header "ref.h"
-    header "Greeter.objc.h"
-    header "Person.objc.h"
-    header "Universe.objc.h"
-    header "User.h"
-
-    export *
-}
