@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		087F20002AC3504E0067B4E4 /* User.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 087F1FFF2AC3504E0067B4E4 /* User.xcframework */; };
 		0895773C2ABBEBDD00AB7D36 /* GoMobileTesterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895773B2ABBEBDD00AB7D36 /* GoMobileTesterApp.swift */; };
 		0895773E2ABBEBDD00AB7D36 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895773D2ABBEBDD00AB7D36 /* ContentView.swift */; };
 		089577402ABBEBDE00AB7D36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0895773F2ABBEBDE00AB7D36 /* Assets.xcassets */; };
 		089577432ABBEBDE00AB7D36 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 089577422ABBEBDE00AB7D36 /* Preview Assets.xcassets */; };
 		0895774C2ABBEC6900AB7D36 /* SwiftPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895774B2ABBEC6900AB7D36 /* SwiftPrinter.swift */; };
-		0895774E2ABE0D0F00AB7D36 /* User.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0895774D2ABE0D0F00AB7D36 /* User.xcframework */; };
 		089577502ABE0DC700AB7D36 /* SwiftIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895774F2ABE0DC700AB7D36 /* SwiftIdentity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		087F1FFF2AC3504E0067B4E4 /* User.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = User.xcframework; path = ../../../../shared/gomobile/apple/User.xcframework; sourceTree = "<group>"; };
 		089577382ABBEBDD00AB7D36 /* GoMobileTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoMobileTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0895773B2ABBEBDD00AB7D36 /* GoMobileTesterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoMobileTesterApp.swift; sourceTree = "<group>"; };
 		0895773D2ABBEBDD00AB7D36 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0895773F2ABBEBDE00AB7D36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		089577422ABBEBDE00AB7D36 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0895774B2ABBEC6900AB7D36 /* SwiftPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPrinter.swift; sourceTree = "<group>"; };
-		0895774D2ABE0D0F00AB7D36 /* User.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = User.xcframework; path = ../../../../shared/apple/User.xcframework; sourceTree = "<group>"; };
 		0895774F2ABE0DC700AB7D36 /* SwiftIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftIdentity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -32,7 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0895774E2ABE0D0F00AB7D36 /* User.xcframework in Frameworks */,
+				087F20002AC3504E0067B4E4 /* User.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,8 +62,8 @@
 				0895773D2ABBEBDD00AB7D36 /* ContentView.swift */,
 				0895774B2ABBEC6900AB7D36 /* SwiftPrinter.swift */,
 				0895774F2ABE0DC700AB7D36 /* SwiftIdentity.swift */,
-				0895774D2ABE0D0F00AB7D36 /* User.xcframework */,
 				0895773F2ABBEBDE00AB7D36 /* Assets.xcassets */,
+				087F1FFF2AC3504E0067B4E4 /* User.xcframework */,
 				089577412ABBEBDE00AB7D36 /* Preview Content */,
 			);
 			path = GoMobileTester;
