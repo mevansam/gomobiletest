@@ -45,7 +45,7 @@ Build framework for apple ios
 ```
 cd common/go
 gomobile bind \
-  -o ../../shared/apple/User.xcframework \
+  -o ../../shared/apple/gomobile/User.xcframework \
   -target=ios,iossimulator,macos \
   -ldflags=-w \
   ./greeter ./person
@@ -55,7 +55,7 @@ Build framework for apple android
 ```
 cd ./common/go
 gomobile bind \
-  -o ../../shared/android/User.aar \
+  -o ../../shared/gomobile/android/User.aar \
   -target=android -androidapi 21 \
   -ldflags=-w \
   ./greeter ./person
@@ -63,5 +63,9 @@ gomobile bind \
 
 Build shared package for flutter
 ```
-flutter create --template=package user
+cd ./shared/flutter
+flutter create \
+  --template=plugin_ffi \
+  --platforms=ios,android,windows,linux,macos \
+  user
 ```

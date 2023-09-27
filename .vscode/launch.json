@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "Flutter GoMobileTest App",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "apps/flutter/go_mobile_tester",
+      "program": "lib/main.dart"
+    }
+  ]
+}
