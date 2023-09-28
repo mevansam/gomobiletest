@@ -1,12 +1,20 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'dart:io';
 
-import 'package:user/user.dart';
+import 'package:test/test.dart';
+import 'package:user/user.dart' as user;
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
+  // Get the path to the Dart executable
+  String dartExecutable = Platform.executable;
+  print('Dart SDK path: $dartExecutable');
+
+  test('adds one to input values', () async {
+    int sumResult = user.sum(1, 2);
+    print("sumResult = $sumResult");
+    expect(sumResult, 3);
+
+    int sumAsyncResult = await user.sumAsync(3, 4);
+    print("sumAsyncResult = $sumAsyncResult");
+    expect(sumAsyncResult, 7);
   });
 }
