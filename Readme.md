@@ -45,7 +45,7 @@ Build framework for apple ios
 ```
 cd common/go
 gomobile bind \
-  -o ../../shared/apple/gomobile/User.xcframework \
+  -o ../../shared/gomobile/apple/User.xcframework \
   -target=ios,iossimulator,macos \
   -ldflags=-w \
   ./greeter ./person
