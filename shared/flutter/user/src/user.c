@@ -21,3 +21,8 @@ FFI_PLUGIN_EXPORT intptr_t sum_long_running(intptr_t a, intptr_t b) {
 #endif
   return a + b;
 }
+
+// A simple sum function with a callback with the result
+FFI_PLUGIN_EXPORT int32_t sum_with_callback(int64_t context, callback_t callback, int32_t a, int32_t b) {
+  return callback(context, a + b);
+}

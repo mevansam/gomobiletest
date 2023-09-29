@@ -73,9 +73,8 @@ void main(List<String> arguments) {
 Future<ProcessResult> runClangProcess(String rootPath, Options options) async {
   final workingDirectory = path.join(rootPath, 'src');
 
-  final binCache =
-      path.dirname(path.dirname(path.dirname(Platform.executable)));
-  final nativeLibPath = path.join(binCache, options.outputfiledir);
+  final binSDK = path.dirname(Platform.executable);
+  final nativeLibPath = path.join(binSDK, "Frameworks", options.outputfiledir);
   final nativeLibFile = path.join(nativeLibPath, options.outputfilename);
 
   await Directory(nativeLibPath).create(recursive: true);
