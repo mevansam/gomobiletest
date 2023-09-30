@@ -9,7 +9,7 @@ headers:
   entry-points:
     - 'src/user.h'
   include-directives:
-    - 'src/user.h'
+    - 'src/**.h'
 preamble: |
   // ignore_for_file: always_specify_types
   // ignore_for_file: camel_case_types

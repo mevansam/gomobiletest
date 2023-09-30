@@ -27,6 +27,107 @@ class UserBindings {
           lookup)
       : _lookup = lookup;
 
+  late final ffi.Pointer<BOOL> _TRUE = _lookup<BOOL>('TRUE');
+
+  int get TRUE => _TRUE.value;
+
+  set TRUE(int value) => _TRUE.value = value;
+
+  late final ffi.Pointer<BOOL> _FALSE = _lookup<BOOL>('FALSE');
+
+  int get FALSE => _FALSE.value;
+
+  set FALSE(int value) => _FALSE.value = value;
+
+  ffi.Pointer<ffi.Void> GreeterNewGreeter(
+    ffi.Pointer<printer_t> h_printer,
+  ) {
+    return _GreeterNewGreeter(
+      h_printer,
+    );
+  }
+
+  late final _GreeterNewGreeterPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<printer_t>)>>('GreeterNewGreeter');
+  late final _GreeterNewGreeter = _GreeterNewGreeterPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<printer_t>)>();
+
+  void GreeterFreeGreeter(
+    ffi.Pointer<ffi.Void> go_greeter,
+  ) {
+    return _GreeterFreeGreeter(
+      go_greeter,
+    );
+  }
+
+  late final _GreeterFreeGreeterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'GreeterFreeGreeter');
+  late final _GreeterFreeGreeter =
+      _GreeterFreeGreeterPtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void GreeterGreet(
+    ffi.Pointer<ffi.Void> go_greeter,
+    ffi.Pointer<ffi.Void> go_person,
+  ) {
+    return _GreeterGreet(
+      go_greeter,
+      go_person,
+    );
+  }
+
+  late final _GreeterGreetPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>('GreeterGreet');
+  late final _GreeterGreet = _GreeterGreetPtr.asFunction<
+      void Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>();
+
+  ffi.Pointer<ffi.Void> PersonNewPerson(
+    ffi.Pointer<identity_t> h_identity,
+  ) {
+    return _PersonNewPerson(
+      h_identity,
+    );
+  }
+
+  late final _PersonNewPersonPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(
+              ffi.Pointer<identity_t>)>>('PersonNewPerson');
+  late final _PersonNewPerson = _PersonNewPersonPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(ffi.Pointer<identity_t>)>();
+
+  void PersonFreePerson(
+    ffi.Pointer<ffi.Void> go_person,
+  ) {
+    return _PersonFreePerson(
+      go_person,
+    );
+  }
+
+  late final _PersonFreePersonPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'PersonFreePerson');
+  late final _PersonFreePerson =
+      _PersonFreePersonPtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void PersonAge(
+    ffi.Pointer<ffi.Void> go_person,
+  ) {
+    return _PersonAge(
+      go_person,
+    );
+  }
+
+  late final _PersonAgePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'PersonAge');
+  late final _PersonAge =
+      _PersonAgePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
   /// A very short-lived native function.
   ///
   /// For very short-lived functions, it is fine to call them on the main isolate.
@@ -89,6 +190,30 @@ class UserBindings {
   late final _sum_with_callback = _sum_with_callbackPtr
       .asFunction<int Function(int, callback_t, int, int)>();
 }
+
+typedef BOOL = ffi.UnsignedChar;
+
+final class printer_t extends ffi.Struct {
+  @ffi.Int64()
+  external int context;
+
+  external print_something_t printSomething;
+}
+
+/// Printer interface client reference
+typedef print_something_t = ffi.Pointer<
+    ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Char>)>>;
+
+final class identity_t extends ffi.Struct {
+  @ffi.Int64()
+  external int context;
+
+  external username_t username;
+}
+
+/// Identity interface client reference
+typedef username_t = ffi
+    .Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int64)>>;
 
 /// A simple sum function with a callback with the result
 typedef callback_t
