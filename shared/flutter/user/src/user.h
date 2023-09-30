@@ -15,6 +15,9 @@
 #define FFI_PLUGIN_EXPORT
 #endif
 
+#include "greeter.h"
+#include "person.h"
+
 // A very short-lived native function.
 //
 // For very short-lived functions, it is fine to call them on the main isolate.
