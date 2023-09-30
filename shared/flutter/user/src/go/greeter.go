@@ -19,10 +19,15 @@ import (
 	"appbricks.io/gomobiletest/person"
 )
 
-// Stub for calling caller's
+// pool of allocated greeter instances passed
+// to the caller. this prevents the instances
+// from being garbage collected by the go runtime
+var greeterPool = make(map[uintptr]*greeter.Greeter)
+
+// stub for calling caller's
 // printer interface via cgo
 type printerStub struct {
-	// Handle (printer_t) to caller's 
+	// handle (printer_t) to caller's 
 	// printer interface reference
 	hPrinter uintptr
 }
@@ -35,15 +40,15 @@ func (p *printerStub) PrintSomething(s string) {
 
 //export GreeterNewGreeter
 func GreeterNewGreeter(hPrinter uintptr) uintptr {
-	return uintptr(unsafe.Pointer(greeter.NewGreeter(&printerStub{hPrinter: hPrinter})))
+	greeter := greeter.NewGreeter(&printerStub{hPrinter: hPrinter})
+	greeterPtr := uintptr(unsafe.Pointer(greeter))
+	greeterPool[greeterPtr] = greeter
+	return greeterPtr
 }
 
 //export GreeterFreeGreeter
 func GreeterFreeGreeter(goGreeter uintptr) {
-	greeter := (*greeter.Greeter)(unsafe.Pointer(goGreeter))
-	if greeter != nil {
-		greeter = nil
-	}
+	delete(greeterPool, goGreeter)
 }
 
 //export GreeterGreet

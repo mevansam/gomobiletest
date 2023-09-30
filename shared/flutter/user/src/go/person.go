@@ -13,11 +13,15 @@ package main
 import "C"
 
 import (
-	"fmt"
 	"unsafe"
 
 	"appbricks.io/gomobiletest/person"
 )
+
+// pool of allocated person instances passed
+// to the caller. this prevents the instances
+// from being garbage collected by the go runtime
+var personPool = make(map[uintptr]*person.Person)
 
 // Stub for calling caller's
 // identity interface via cgo
@@ -28,21 +32,23 @@ type identityStub struct {
 }
 
 func (i *identityStub) Username() string {
-	fmt.Println("identityStub.Username - returning anika")
-	return "anika"
+	cusername := C.identityUsername(unsafe.Pointer(i.hIdentity))
+	username := C.GoString(cusername)
+	C.free(unsafe.Pointer(cusername))
+	return username
 }
 
 //export PersonNewPerson
 func PersonNewPerson(hIdentity uintptr) uintptr {
-	return uintptr(unsafe.Pointer(person.NewPerson(&identityStub{hIdentity: hIdentity})))
+	person := person.NewPerson(&identityStub{hIdentity: hIdentity})
+	personPtr := uintptr(unsafe.Pointer(person))
+	personPool[personPtr] = person
+	return personPtr
 }
 
 //export PersonFreePerson
 func PersonFreePerson(goPerson uintptr) {
-	person := (*person.Person)(unsafe.Pointer(goPerson))
-	if person != nil {
-		person = nil
-	}
+	delete(personPool, goPerson)
 }
 
 //export PersonAge
