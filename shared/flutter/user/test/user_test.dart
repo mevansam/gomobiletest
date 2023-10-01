@@ -5,7 +5,6 @@ import 'package:user/user.dart' as user;
 
 void main() {
   test('Retrieves a person instances and sends a greeting', () async {
-    stdout.writeln();
     TestPrinter printer = TestPrinter();
 
     user.Person person = user.Person(TestIdentity('anika'));

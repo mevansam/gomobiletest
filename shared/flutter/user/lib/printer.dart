@@ -3,6 +3,9 @@ import 'package:ffi/ffi.dart';
 
 import 'user_bindings_generated.dart' as user;
 
+// Printer skeleton to invoke Dart
+// code when called from  native code
+
 abstract class Printer {
   void print(String s);
 
@@ -23,7 +26,7 @@ abstract class Printer {
     _finalizer.detach(this);
   }
 
-  // Interface func skeletons from native code to Dart code
+  // Interface func skeletons from foreign code to Dart code
 
   static void _print(int context, ffi.Pointer<ffi.Char> s) {
     String str = s.cast<Utf8>().toDartString();

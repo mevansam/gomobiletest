@@ -1,5 +1,4 @@
-import 'dart:ffi' as ffi;
-
+import 'foreign_instance_stub.dart';
 import 'user_bindings.dart' as bindings;
 
 import 'printer.dart';
@@ -11,24 +10,12 @@ Greeter newGreeter(Printer printer) {
   return Greeter(printer);
 }
 
-class Greeter {
+class Greeter extends ForeignInstanceStub {
   void greet(Person person) {
     bindings.user.GreeterGreet(handle, person.handle);
   }
 
-  late final ffi.Pointer<ffi.Void> handle;
-  final Printer _printer;
-
-  static final Finalizer<Greeter> _finalizer =
-      Finalizer((greeter) => greeter.finalize());
-
-  Greeter(this._printer) {
-    _finalizer.attach(this, this, detach: this);
-    handle = bindings.user.GreeterNewGreeter(_printer.handle);
-  }
-
-  void finalize() {
-    bindings.user.GreeterFreeGreeter(handle);
-    _finalizer.detach(this);
-  }
+  Greeter(Printer printer)
+      : super(bindings.user.GreeterNewGreeter(printer.handle),
+            bindings.user.GreeterFreeGreeter);
 }
