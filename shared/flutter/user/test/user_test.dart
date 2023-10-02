@@ -12,6 +12,11 @@ void main() {
     expect(person.address(), '1186 Martha Street, Whipoorwill, AZ 86510');
     expect(person.dob(), '2004-04-21');
 
+    stdout.writeln("Name = ${person.fullName()}");
+    stdout.writeln("Address = ${person.address()}");
+    stdout.writeln("DOB = ${person.dob()}");
+    stdout.writeln("Age = ${person.age()}");
+
     user.Greeter greeter = user.Greeter(printer);
     greeter.greet(person);
     expect(printer.testResult, 'Hello Anika Luciana!');

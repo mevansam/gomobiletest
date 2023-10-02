@@ -49,9 +49,25 @@ func (p *Person) Age() string {
 		panic(err)
 	}
 
-	ageInDays := time.Since(dob).Hours() / 24
-	ageInYears := ageInDays / 365
-	ageInDays -= ageInYears * 365
+	ageInYears, ageInMonths := calculateAge(dob)
+	return fmt.Sprintf("%d Years and %d Months", 
+		int(ageInYears), int(ageInMonths))
+}
 
-	return fmt.Sprintf("%d Years %d Days", int(ageInYears), int(ageInDays))
+func calculateAge(birthDate time.Time) (years, months int) {
+	currentDate := time.Now()
+
+	// Calculate years.
+	years = currentDate.Year() - birthDate.Year()
+
+	// Calculate months.
+	if currentDate.Month() < birthDate.Month() ||
+			(currentDate.Month() == birthDate.Month() && currentDate.Day() < birthDate.Day()) {
+			months = 12 - int(birthDate.Month()) + int(currentDate.Month()) - 1
+			years--
+	} else {
+			months = int(currentDate.Month()) - int(birthDate.Month())
+	}
+
+	return years, months
 }
