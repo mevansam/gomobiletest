@@ -21,7 +21,8 @@ abstract class Identity extends ForeignInterfaceSkel<user.identity_t> {
     return handle;
   }
 
-  // Interface func skeletons from foreign code to Dart code
+  // Interface func skeletons for calling
+  // Dart code from foreign code
 
   static ffi.Pointer<ffi.Char> _username(int context) {
     final Identity identity =
