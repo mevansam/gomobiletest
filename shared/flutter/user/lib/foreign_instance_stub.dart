@@ -32,7 +32,7 @@ abstract class ForeignInstanceStub {
   static final Finalizer<ForeignInstanceStub> _finalizer =
       Finalizer((fistub) => fistub.finalize());
   void finalize() {
-    asyncRunner.finalize();
+    asyncRunner.dispose();
     _foreignFinalizer(_handle);
     _finalizer.detach(this);
   }

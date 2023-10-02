@@ -26,7 +26,7 @@ class AsyncRunner {
   }
 
   // Shuts down the isolate.
-  finalize() {
+  dispose() {
     _isolate?.kill();
   }
 
