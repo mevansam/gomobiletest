@@ -1,21 +1,15 @@
 import 'dart:async';
 import 'dart:isolate';
 
-abstract class AsyncRequest {
-  AsyncResponse execute();
-
-  late final int id;
-  static int _nextId = 0;
-  AsyncRequest() {
-    id = _nextId++;
-  }
-}
-
-class AsyncResponse {
-  final int id;
-  AsyncResponse(AsyncRequest request) : id = request.id;
-}
-
+// The AsyncRunner is a helper class that can be
+// used to run code in an isolate and return the
+// result to the caller. This can be used to create
+// asynchronous bindings to foreign code. In such
+// use cases you must be careful not to call foreign
+// code from the isolate that will call back into
+// Dart code via an interface skeleton that was
+// created on the main isolate. This class is not
+// limited to such use cases though.
 class AsyncRunner {
   // Executes the given request in an isolate
   // and returns a future with the response.
@@ -102,4 +96,19 @@ class AsyncRunner {
   }
 
   final Map<int, Completer> _asyncCalls = <int, Completer>{};
+}
+
+abstract class AsyncRequest {
+  AsyncResponse execute();
+
+  late final int id;
+  static int _nextId = 0;
+  AsyncRequest() {
+    id = _nextId++;
+  }
+}
+
+class AsyncResponse {
+  final int id;
+  AsyncResponse(AsyncRequest request) : id = request.id;
 }
