@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'async_runner.dart';
 import 'user_bindings.dart' as bindings;
