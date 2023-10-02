@@ -8,9 +8,12 @@ void main() {
     TestPrinter printer = TestPrinter();
 
     user.Person person = user.Person(TestIdentity('anika'));
+    expect(person.fullName(), 'Anika Luciana');
+    expect(person.address(), '1186 Martha Street, Whipoorwill, AZ 86510');
+    expect(person.dob(), '2004-04-21');
+
     user.Greeter greeter = user.Greeter(printer);
     greeter.greet(person);
-
     expect(printer.testResult, 'Hello Anika Luciana!');
   });
 
