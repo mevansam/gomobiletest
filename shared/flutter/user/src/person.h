@@ -23,6 +23,9 @@
 
 FFI_PLUGIN_EXPORT void *PersonNewPerson(identity_t *h_identity);
 FFI_PLUGIN_EXPORT void PersonFreePerson(void *go_person);
-FFI_PLUGIN_EXPORT void PersonAge(void *go_person);
+FFI_PLUGIN_EXPORT const char *PersonFullName(void *go_person);
+FFI_PLUGIN_EXPORT const char *PersonAddress(void *go_person);
+FFI_PLUGIN_EXPORT const char *PersonDOB(void *go_person);
+FFI_PLUGIN_EXPORT const char *PersonAge(void *go_person);
 
 #endif

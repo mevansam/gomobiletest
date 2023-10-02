@@ -114,7 +114,51 @@ class UserBindings {
   late final _PersonFreePerson =
       _PersonFreePersonPtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
-  void PersonAge(
+  ffi.Pointer<ffi.Char> PersonFullName(
+    ffi.Pointer<ffi.Void> go_person,
+  ) {
+    return _PersonFullName(
+      go_person,
+    );
+  }
+
+  late final _PersonFullNamePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Void>)>>('PersonFullName');
+  late final _PersonFullName = _PersonFullNamePtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Void>)>();
+
+  ffi.Pointer<ffi.Char> PersonAddress(
+    ffi.Pointer<ffi.Void> go_person,
+  ) {
+    return _PersonAddress(
+      go_person,
+    );
+  }
+
+  late final _PersonAddressPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Void>)>>('PersonAddress');
+  late final _PersonAddress = _PersonAddressPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Void>)>();
+
+  ffi.Pointer<ffi.Char> PersonDOB(
+    ffi.Pointer<ffi.Void> go_person,
+  ) {
+    return _PersonDOB(
+      go_person,
+    );
+  }
+
+  late final _PersonDOBPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Void>)>>('PersonDOB');
+  late final _PersonDOB = _PersonDOBPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Void>)>();
+
+  ffi.Pointer<ffi.Char> PersonAge(
     ffi.Pointer<ffi.Void> go_person,
   ) {
     return _PersonAge(
@@ -122,11 +166,11 @@ class UserBindings {
     );
   }
 
-  late final _PersonAgePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'PersonAge');
-  late final _PersonAge =
-      _PersonAgePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+  late final _PersonAgePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Void>)>>('PersonAge');
+  late final _PersonAge = _PersonAgePtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Void>)>();
 
   /// A very short-lived native function.
   ///

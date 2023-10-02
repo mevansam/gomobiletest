@@ -51,6 +51,36 @@ func PersonFreePerson(goPerson uintptr) {
 	delete(personPool, goPerson)
 }
 
+//export PersonFullName
+func PersonFullName(goPerson uintptr) *C.char {
+	if goPerson != 0 {
+		person := (*person.Person)(unsafe.Pointer(goPerson))
+		return C.CString(person.FullName)
+	} else {
+		panic("PersonFullName called with nil pointer")
+	}
+}
+
+//export PersonAddress
+func PersonAddress(goPerson uintptr) *C.char {
+	if goPerson != 0 {
+		person := (*person.Person)(unsafe.Pointer(goPerson))
+		return C.CString(person.Address)
+	} else {
+		panic("PersonAddress called with nil pointer")
+	}
+}
+
+//export PersonDOB
+func PersonDOB(goPerson uintptr) *C.char {
+	if goPerson != 0 {
+		person := (*person.Person)(unsafe.Pointer(goPerson))
+		return C.CString(person.DOB)
+	} else {
+		panic("PersonDOB called with nil pointer")
+	}
+}
+
 //export PersonAge
 func PersonAge(goPerson uintptr) *C.char {
 	if goPerson != 0 {
