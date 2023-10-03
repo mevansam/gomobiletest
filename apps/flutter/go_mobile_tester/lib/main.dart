@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user/user.dart' as user;
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    debugPrint("test");
+    // test integration with user package
+    user.Person person = user.Person(TestIdentity('anika'));
+    user.Greeter greeter = user.Greeter(TestPrinter());
+    greeter.greet(person);
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -123,5 +127,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class TestIdentity extends user.Identity {
+  @override
+  String username() {
+    return name;
+  }
+
+  final String name;
+
+  TestIdentity(this.name) : super();
+}
+
+class TestPrinter extends user.Printer {
+  @override
+  void print(String s) {
+    debugPrint("This just in: $s");
   }
 }
