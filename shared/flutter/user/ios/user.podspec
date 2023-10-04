@@ -39,7 +39,7 @@ Flutter GoMobileTest User FFI plugin project.
     :name => 'Build Go Source', 
     :script => build_go_source,
     :input_files => [
-      '${BUILD_DIR}/../../../../../../../common/**/*',
+      '${BUILD_DIR}/../../../../../common/**/*',
       '${PODS_TARGET_SRCROOT}/../src/**/*',
     ], 
     :output_files => [
@@ -49,7 +49,7 @@ Flutter GoMobileTest User FFI plugin project.
   }
   s.vendored_libraries = '${PODS_TARGET_SRCROOT}/../build/libuser_go.a'
   s.xcconfig = {
-    'LIBRARY_SEARCH_PATHS' => '$(inherited) "$(BUILD_DIR)/../../../../../../../shared/flutter/user/build"',
+    'LIBRARY_SEARCH_PATHS' => '$(inherited) "$(BUILD_DIR)/../../../../../shared/flutter/user/build"',
     'OTHER_LDFLAGS' => '$(inherited) -all_load'
   }
   s.libraries = [
@@ -60,6 +60,9 @@ Flutter GoMobileTest User FFI plugin project.
   s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+  s.pod_target_xcconfig = { 
+    'DEFINES_MODULE' => 'YES', 
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386 arm64' 
+  }
   s.swift_version = '5.0'
 end
