@@ -1,0 +1,6 @@
+// You Apple developer account's Team ID
+DEVELOPMENT_TEAM = 
+
+// The bundle identifier of the apps.
+// Should be an app id created at developer.apple.com
+APP_ID_IOS = 
