@@ -2,6 +2,7 @@
 export 'sum_example.dart';
 export 'sum_callback_example.dart';
 
+export 'error.dart';
 export 'identity.dart';
 export 'person.dart';
 export 'printer.dart';

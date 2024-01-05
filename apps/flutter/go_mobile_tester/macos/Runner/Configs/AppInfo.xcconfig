@@ -7,7 +7,7 @@
 #include "../BuildConfig.xcconfig"
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = go_mobile_tester
+PRODUCT_NAME = Go Mobile Tester
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 org.mevansam. All rights reserved.

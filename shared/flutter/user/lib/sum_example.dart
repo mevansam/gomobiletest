@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:ffi_helper/ffi_helper.dart';
 
-import 'async_runner.dart';
 import 'user_bindings.dart' as bindings;
 
 /// A very short-lived native function.

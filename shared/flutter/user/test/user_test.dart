@@ -1,13 +1,30 @@
 import 'dart:io';
 
 import 'package:test/test.dart';
+
+import 'package:ffi_helper/ffi_helper.dart';
 import 'package:user/user.dart' as user;
 
 void main() {
   test('Retrieves a person instances and sends a greeting', () async {
+    ErrorHandler errorHandler = ErrorHandler();
     TestPrinter printer = TestPrinter();
 
-    user.Person person = user.Person(TestIdentity('anika'));
+    user.Person person;
+
+    try {
+      person = user.Person(
+          TestIdentity('999', 'anika', '/test/anika.gif'), errorHandler);
+    } on InstanceCreateError {
+      expect(errorHandler.testErrorCode, 404);
+      expect(errorHandler.testErrorMessage,
+          'Person not found with userid "999" and username "anika".');
+    }
+
+    errorHandler.reset();
+    person = user.Person(
+        TestIdentity('001', 'anika', '/test/anika.gif'), errorHandler);
+
     expect(person.fullName(), 'Anika Luciana');
     expect(person.address(), '1186 Martha Street, Whipoorwill, AZ 86510');
     expect(person.dob(), '2004-04-21');
@@ -46,15 +63,44 @@ int sumCallback(int val) {
   return val * 2;
 }
 
+class ErrorHandler extends user.ErrorHandler {
+  int testErrorCode = 0;
+  String testErrorMessage = '';
+
+  @override
+  void handleError(int code, String message) {
+    testErrorCode = code;
+    testErrorMessage = message;
+    stdout.writeln("Error: $code, $message");
+  }
+
+  void reset() {
+    testErrorCode = 0;
+    testErrorMessage = '';
+  }
+}
+
 class TestIdentity extends user.Identity {
+  @override
+  String userid() {
+    return id;
+  }
+
   @override
   String username() {
     return name;
   }
 
-  final String name;
+  @override
+  String avatar() {
+    return avatarUri;
+  }
 
-  TestIdentity(this.name) : super();
+  final String id;
+  final String name;
+  final String avatarUri;
+
+  TestIdentity(this.id, this.name, this.avatarUri) : super();
 }
 
 class TestPrinter extends user.Printer {

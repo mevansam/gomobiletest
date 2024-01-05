@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'package:go_mobile_tester/app_state.dart';
-import 'package:go_mobile_tester/app_auth.dart';
+import 'package:go_mobile_tester/state/app_state.dart';
+import 'package:go_mobile_tester/screens/app_auth.dart';
 
 void main() async {
   // On Desktop platforms the minimum size
@@ -13,7 +13,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await windowManager.ensureInitialized();
 
-    WindowManager.instance.setMinimumSize(const Size(240, 400));
+    WindowManager.instance.setMinimumSize(const Size(360, 400));
     WindowManager.instance.setTitle(Main.title);
   }
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:go_mobile_tester/app_state.dart';
-import 'package:go_mobile_tester/app_layout.dart';
-import 'package:go_mobile_tester/home_page.dart';
-import 'package:go_mobile_tester/login_page.dart';
+import 'package:go_mobile_tester/state/app_state.dart';
+import 'package:go_mobile_tester/screens/app_layout.dart';
+import 'package:go_mobile_tester/screens/home_page.dart';
+import 'package:go_mobile_tester/screens/login_page.dart';
 
 class AppAuth extends StatelessWidget {
   const AppAuth({super.key});
@@ -20,9 +20,10 @@ class AppAuth extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: AppLayout(
-          body: appState.isLoggedIn()
+          body: appState.isLoggedIn
               ? HomePage(appState: appState)
               : LoginPage(appState: appState),
+          isWaiting: appState.isWaiting,
         ),
       ),
     );

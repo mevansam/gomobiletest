@@ -13,7 +13,7 @@ abstract class ForeignInstanceStub {
   ffi.Pointer<ffi.Void> get handle => _handle;
 
   // The async runner used to execute function
-  // stups asynchronously in an isolate.
+  // stubs asynchronously in an isolate.
   final asyncRunner = AsyncRunner();
 
   // The handle to the foreign instance used
@@ -25,7 +25,13 @@ abstract class ForeignInstanceStub {
   // frees the foreign instance.
   late final ForeignFinalizer _foreignFinalizer;
 
-  ForeignInstanceStub(this._handle, this._foreignFinalizer) {
+  ForeignInstanceStub(
+      ffi.Pointer<ffi.Void> handle, ForeignFinalizer foreignFinalizer) {
+    if (handle == ffi.nullptr) {
+      throw InstanceCreateError('Foreign instance handle is null');
+    }
+    _handle = handle;
+    _foreignFinalizer = foreignFinalizer;
     _finalizer.attach(this, this, detach: this);
   }
 
@@ -39,3 +45,12 @@ abstract class ForeignInstanceStub {
 }
 
 typedef ForeignFinalizer = void Function(ffi.Pointer<ffi.Void>);
+
+class InstanceCreateError extends Error {
+  InstanceCreateError(this.message);
+
+  final String message;
+
+  @override
+  String toString() => message;
+}

@@ -68,4 +68,7 @@ flutter create \
   --template=plugin_ffi \
   --platforms=ios,android,windows,linux,macos \
   user
+flutter create \
+  --template=package \
+  ffi_helper
 ```

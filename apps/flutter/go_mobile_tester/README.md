@@ -14,3 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Clean Build
+
+```
+flutter clean && \
+  rm -fr ../../../shared/flutter/user/build/ && \
+  rm -fr ../../../shared/flutter/user/android/.cxx && \
+  rm -fr ios/Pods && \
+  rm -fr ios/.symlinks && \
+  rm -fr macos/Pods && \
+  rm -fr macos/.symlinks && \
+  go clean -cache
+```

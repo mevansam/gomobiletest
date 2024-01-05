@@ -2,16 +2,22 @@ name: user
 description: A new Flutter FFI plugin project.
 version: 0.0.1
 homepage: mevansam.org
+publish_to: none
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
   flutter: '>=3.3.0'
 
 dependencies:
-  ffi: ^2.1.0
   flutter:
     sdk: flutter
+    
+  ffi: ^2.1.0
   plugin_platform_interface: ^2.0.2
+
+  # Shared ffi helper package
+  ffi_helper:
+    path: ../ffi_helper
 
 dev_dependencies:
   ffigen: ^9.0.1

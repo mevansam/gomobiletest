@@ -1,15 +1,5 @@
 package main
 
-// #include <stdlib.h>
-// #include <stdio.h>
-// #include <sys/types.h>
-//
-// #include "../identity.h"
-//
-// static const char *identityUsername(void *ref) {
-//	identity_t *identity = (identity_t *)ref;
-// 	return identity->username(identity->context);
-// }
 import "C"
 
 import (
@@ -23,27 +13,17 @@ import (
 // from being garbage collected by the go runtime
 var personPool = make(map[uintptr]*person.Person)
 
-// Stub for calling caller's
-// identity interface via cgo
-type identityStub struct {
-	// Handle (identity_t) to caller's 
-	// identity interface reference
-	hIdentity uintptr
-}
-
-func (i *identityStub) Username() string {
-	cusername := C.identityUsername(unsafe.Pointer(i.hIdentity))
-	username := C.GoString(cusername)
-	C.free(unsafe.Pointer(cusername))
-	return username
-}
-
 //export PersonNewPerson
-func PersonNewPerson(hIdentity uintptr) uintptr {
-	person := person.NewPerson(&identityStub{hIdentity: hIdentity})
-	personPtr := uintptr(unsafe.Pointer(person))
-	personPool[personPtr] = person
-	return personPtr
+func PersonNewPerson(hIdentity, hErrorHandler uintptr) uintptr {
+	if person := person.NewPerson(
+		&identityStub{hIdentity: hIdentity},
+		&errorHandlerStub{hErrorHandler: hErrorHandler},
+	); person != nil {
+		personPtr := uintptr(unsafe.Pointer(person))
+		personPool[personPtr] = person
+		return personPtr
+	}
+	return 0
 }
 
 //export PersonFreePerson

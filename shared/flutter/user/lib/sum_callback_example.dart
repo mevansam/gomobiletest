@@ -1,14 +1,14 @@
-import 'dart:async';
+import 'dart:async' as async;
 import 'dart:ffi' as ffi;
+import 'package:ffi_helper/ffi_helper.dart';
 
-import 'async_runner.dart';
 import 'user_bindings.dart' as bindings;
 
 // A simple sum function with a callback with the result
 
 Future<int> sumAsyncCallback(int a, int b, SumCallback callback) async {
   AsyncRunner asyncRunner = AsyncRunner();
-  final Completer<int> completer = Completer<int>();
+  final async.Completer<int> completer = async.Completer<int>();
 
   asyncRunner
       .run<_SumAsyncRequest, _SumAsyncResponse>(

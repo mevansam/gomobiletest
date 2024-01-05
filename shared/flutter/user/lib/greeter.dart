@@ -1,4 +1,4 @@
-import 'foreign_instance_stub.dart';
+import 'package:ffi_helper/ffi_helper.dart';
 import 'user_bindings.dart' as bindings;
 
 import 'printer.dart';

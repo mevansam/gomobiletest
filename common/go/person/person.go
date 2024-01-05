@@ -3,42 +3,51 @@ package person
 import (
 	"fmt"
 	"time"
+
+	"appbricks.io/gomobiletest/error"
 )
 
 type Identity interface {
+	UserID() string
   Username() string
+	Avatar() string
 }
 
 type Person struct {
-	identity Identity
-
 	FullName string
 	Address  string
 	DOB			 string
 }
 
 var people = map[string]*Person{
-	"anika": {
+	"001": {
 		FullName: "Anika Luciana", 
 		Address: "1186 Martha Street, Whipoorwill, AZ 86510",
 		DOB: "2004-04-21",
 	},
-	"ceci": {
+	"002": {
 		FullName: "Cecilia David", 
 		Address: "3919 Hayhurst Lane, Southfield, MI 48075",
 		DOB: "1995-10-15",
 	},
-	"kazi": {
+	"003": {
 		FullName: "Kazimír Tomislav", 
 		Address: "3805 Ocala Street, Maitland, Fl 32751",
 		DOB: "1999-11-11",
 	},
 }
 
-func NewPerson(identity Identity) *Person {
-	person := people[identity.Username()]
-	if person != nil {
-		person.identity = identity
+func NewPerson(identity Identity, errorHandler error.ErrorHandler) *Person {
+	person := people[identity.UserID()]
+	if person == nil {
+		errorHandler.HandleError(
+			404, 
+			fmt.Sprintf(
+				"Person not found with userid \"%s\" and username \"%s\".", 
+				identity.UserID(),
+				identity.Username(),
+			),
+		)
 	}
 	return person
 }

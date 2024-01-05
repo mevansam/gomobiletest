@@ -6,7 +6,7 @@ import (
 
 // Printer types can print things.
 type Printer interface {
-  PrintSomething(s string)
+  Print(s string)
 }
 
 // Greeter greets people.
@@ -23,5 +23,5 @@ func NewGreeter(printer Printer) *Greeter {
 
 // Greet greets someone.
 func (g *Greeter) Greet(p *person.Person) {
-  g.printer.PrintSomething("Hello " + p.FullName + "!")
+  g.printer.Print("Hello " + p.FullName + "!")
 }

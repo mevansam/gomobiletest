@@ -87,18 +87,21 @@ class UserBindings {
 
   ffi.Pointer<ffi.Void> PersonNewPerson(
     ffi.Pointer<identity_t> h_identity,
+    ffi.Pointer<error_handler_t> h_error_handler,
   ) {
     return _PersonNewPerson(
       h_identity,
+      h_error_handler,
     );
   }
 
   late final _PersonNewPersonPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Pointer<ffi.Void> Function(
-              ffi.Pointer<identity_t>)>>('PersonNewPerson');
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<identity_t>,
+              ffi.Pointer<error_handler_t>)>>('PersonNewPerson');
   late final _PersonNewPerson = _PersonNewPersonPtr.asFunction<
-      ffi.Pointer<ffi.Void> Function(ffi.Pointer<identity_t>)>();
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<identity_t>, ffi.Pointer<error_handler_t>)>();
 
   void PersonFreePerson(
     ffi.Pointer<ffi.Void> go_person,
@@ -241,23 +244,43 @@ final class printer_t extends ffi.Struct {
   @ffi.Int64()
   external int context;
 
-  external print_something_t printSomething;
+  external print_t print;
 }
 
 /// Printer interface client reference
-typedef print_something_t = ffi.Pointer<
+typedef print_t = ffi.Pointer<
     ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<ffi.Char>)>>;
 
 final class identity_t extends ffi.Struct {
   @ffi.Int64()
   external int context;
 
+  external userid_t userid;
+
   external username_t username;
+
+  external avatar_t avatar;
 }
 
 /// Identity interface client reference
+typedef userid_t = ffi
+    .Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int64)>>;
 typedef username_t = ffi
     .Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int64)>>;
+typedef avatar_t = ffi
+    .Pointer<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function(ffi.Int64)>>;
+
+final class error_handler_t extends ffi.Struct {
+  @ffi.Int64()
+  external int context;
+
+  external handle_error_t handle_error;
+}
+
+/// ErrorHandler interface client reference
+typedef handle_error_t = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Void Function(ffi.Int64, ffi.Int, ffi.Pointer<ffi.Char>)>>;
 
 /// A simple sum function with a callback with the result
 typedef callback_t

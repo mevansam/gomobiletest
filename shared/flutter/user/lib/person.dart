@@ -1,14 +1,15 @@
 import 'package:ffi/ffi.dart';
+import 'package:ffi_helper/ffi_helper.dart';
+import 'package:user/error.dart';
 
-import 'foreign_instance_stub.dart';
 import 'user_bindings.dart' as bindings;
 
 import 'identity.dart';
 
 // Person stub to call native code from Dart
 
-Person newPerson(Identity identity) {
-  return Person(identity);
+Person newPerson(Identity identity, ErrorHandler errorHandler) {
+  return Person(identity, errorHandler);
 }
 
 class Person extends ForeignInstanceStub {
@@ -40,7 +41,8 @@ class Person extends ForeignInstanceStub {
     return age;
   }
 
-  Person(Identity identity)
-      : super(bindings.user.PersonNewPerson(identity.handle),
+  Person(Identity identity, ErrorHandler errorHandler)
+      : super(
+            bindings.user.PersonNewPerson(identity.handle, errorHandler.handle),
             bindings.user.PersonFreePerson);
 }
