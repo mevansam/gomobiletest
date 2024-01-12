@@ -5,7 +5,7 @@ import 'package:user/user.dart' as user;
 void showError(BuildContext context, String message) {
   final snackBar = SnackBar(
     behavior: SnackBarBehavior.floating,
-    backgroundColor: Colors.red,
+    backgroundColor: Theme.of(context).colorScheme.error,
     content: Text(message),
     action: SnackBarAction(
       label: 'Dismiss',

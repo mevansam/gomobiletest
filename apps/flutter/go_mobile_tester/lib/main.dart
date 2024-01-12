@@ -33,9 +33,17 @@ class Main extends StatelessWidget {
         child: MaterialApp(
           title: title,
           theme: ThemeData(
-            useMaterial3: true,
-            primarySwatch: Colors.blue,
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.blue,
+            ),
+            useMaterial3: false,
+          ),
+          darkTheme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: Colors.blue,
+            ),
+            useMaterial3: false,
           ),
           home: const AppAuth(),
         ));

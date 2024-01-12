@@ -17,12 +17,7 @@ class MessageDialog extends user.Printer {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(_context, rootNavigator: true).pop(),
-          child: const Text(
-            'DISMISS',
-            style: TextStyle(
-              color: Color(0xFF6200EE),
-            ),
-          ),
+          child: const Text('DISMISS'),
         ),
       ],
     );

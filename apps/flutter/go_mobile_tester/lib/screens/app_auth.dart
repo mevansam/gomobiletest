@@ -15,16 +15,11 @@ class AppAuth extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (context) => AppState(),
-      child: MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: AppLayout(
-          body: appState.isLoggedIn
-              ? HomePage(appState: appState)
-              : LoginPage(appState: appState),
-          isWaiting: appState.isWaiting,
-        ),
+      child: AppLayout(
+        body: appState.isLoggedIn
+            ? HomePage(appState: appState)
+            : LoginPage(appState: appState),
+        isWaiting: appState.isWaiting,
       ),
     );
   }
