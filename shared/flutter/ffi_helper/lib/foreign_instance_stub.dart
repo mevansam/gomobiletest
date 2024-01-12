@@ -23,29 +23,43 @@ abstract class ForeignInstanceStub {
 
   // Pointer to the foreign function that
   // frees the foreign instance.
-  late final ForeignFinalizer _foreignFinalizer;
+  late final void Function(ffi.Pointer<ffi.Void>) _foreignFinalizer;
 
-  ForeignInstanceStub(
-      ffi.Pointer<ffi.Void> handle, ForeignFinalizer foreignFinalizer) {
+  static final Finalizer<_FinalizeWrapper> _finalizer =
+      Finalizer((w) => w.finalize());
+
+  ForeignInstanceStub(ffi.Pointer<ffi.Void> handle,
+      void Function(ffi.Pointer<ffi.Void>) foreignFinalizer) {
     if (handle == ffi.nullptr) {
       throw InstanceCreateError('Foreign instance handle is null');
     }
     _handle = handle;
     _foreignFinalizer = foreignFinalizer;
-    _finalizer.attach(this, this, detach: this);
+    _finalizer.attach(this, _FinalizeWrapper(this), detach: this);
   }
 
-  static final Finalizer<ForeignInstanceStub> _finalizer =
-      Finalizer((fistub) => fistub.finalize());
-  void finalize() {
+  void dispose() {
     asyncRunner.dispose();
     _foreignFinalizer(_handle);
     _finalizer.detach(this);
   }
 }
 
-typedef ForeignFinalizer = void Function(ffi.Pointer<ffi.Void>);
+class _FinalizeWrapper {
+  // Pointer to the foreign function that
+  // frees the foreign instance.
+  late final ForeignInstanceStub _stub;
 
+  _FinalizeWrapper(this._stub);
+
+  void finalize() {
+    _stub.dispose();
+  }
+}
+
+// InstanceCreateError is thrown if the foreign
+// instance handle is null when the stub is
+// instantiated.
 class InstanceCreateError extends Error {
   InstanceCreateError(this.message);
 
