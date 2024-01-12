@@ -1,4 +1,5 @@
 import 'package:user/user.dart' as user;
+import 'package:ffi_helper/ffi_helper.dart';
 
 import 'package:go_mobile_tester/utility/error.dart';
 import 'package:go_mobile_tester/state/app_state.dart';
@@ -21,8 +22,10 @@ class LoginService {
       try {
         var person = user.Person(identity, _errorHandler);
         _appState.userLoggedIn(person);
-      } catch (e) {
+      } on InstanceCreateError {
         throw Exception('Login failed');
+      } catch (e) {
+        throw Exception(e.toString());
       }
     } catch (e) {
       _appState.userLoginFailed(e.toString());
