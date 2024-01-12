@@ -58,7 +58,7 @@ class LoginPage extends StatelessWidget {
                   onPressed: () => doLogin(userNameInput.text),
                   style: TextButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
-                    backgroundColor: Theme.of(context).primaryColorDark,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   child: const Text(
                     'Login',
