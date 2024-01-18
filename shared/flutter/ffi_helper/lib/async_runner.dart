@@ -34,7 +34,7 @@ class AsyncRunner {
     // The SendPort to the helper isolate which is
     // spawned only at the first invocation of the
     // runner's run function.
-    _sendPort ??= await _getAsycHelperIsolatePort();
+    _sendPort ??= await _getAsyncHelperIsolatePort();
     return _sendPort;
   }
 
@@ -43,7 +43,7 @@ class AsyncRunner {
 
   // Spawns the helper isolate for this async
   // instance and sets up the communication port.
-  Future<SendPort> _getAsycHelperIsolatePort() async {
+  Future<SendPort> _getAsyncHelperIsolatePort() async {
     // The helper isolate is going to send us back a
     // SendPort, which we want to wait for.
     final Completer<SendPort> completer = Completer<SendPort>();
