@@ -188,8 +188,8 @@ set_target_properties(${LIB}
 add_custom_target(test
   DEPENDS ${LIB}
   WORKING_DIRECTORY ${ROOT_DIR}
-  COMMAND ${CMAKE_COMMAND} -E make_directory ${ROOT_DIR}/user.framework
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/${SHARED_LIB_NAME} ${ROOT_DIR}/user.framework/${LIB}
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${ROOT_DIR}/${LIB}.framework
+  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/${SHARED_LIB_NAME} ${ROOT_DIR}/${LIB}.framework/${LIB}
   COMMAND dart test ${ROOT_DIR}/test
-  COMMENT "Running user plugin tests"
+  COMMENT "Running ${LIB} plugin tests"
 )
