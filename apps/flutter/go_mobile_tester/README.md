@@ -19,6 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ```
 flutter clean && \
+  rm -fr ../../../shared/flutter/user/user.framework/ && \
   rm -fr ../../../shared/flutter/user/build/ && \
   rm -fr ../../../shared/flutter/user/android/.cxx && \
   rm -fr ios/Pods && \
