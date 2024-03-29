@@ -26,5 +26,6 @@ flutter clean && \
   rm -fr ios/.symlinks && \
   rm -fr macos/Pods && \
   rm -fr macos/.symlinks && \
-  go clean -cache
+  go clean -cache && \
+  flutter pub get
 ```

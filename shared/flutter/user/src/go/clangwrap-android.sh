@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 # go/clangwrap.sh - used by gobuild to invoke clang with the
 # correct SDK when running on macOS to build iOS binaries.
